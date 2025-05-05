@@ -6,14 +6,18 @@ To use in PowerShell, load the library with
 Add-Type -Path "./path/to/DisplayDevices.dll"
 ```
 
-To list all display devices (`getInterfaceName` is either 0 or 1, defaults to 0):
+To retrieve the device interface name, set `$getInterfaceName=1`, otherwise it defaults to 0.
 
+To list all display devices:
 ```pwsh
-[DisplayDevices]::GetAll(getInterfaceName)
+[DisplayDevices]::GetAll($getInterfaceName)
+# or simply
+[DisplayDevices]::GetAll()
 ```
 
-To get display devices by its instance ID:
-
+To get display devices by its instance ID `$deviceID` (for example, **`LNX0000`** in `MONITOR\LNX0000\{UUID}\0000`):
 ```pwsh
-[DisplayDevices]::FromID("LNX0000", getInterfaceName)
+[DisplayDevices]::FromID($deviceID, $getInterfaceName)
+# or simply
+[DisplayDevices]::FromID($deviceID)
 ```
