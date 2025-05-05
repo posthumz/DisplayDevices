@@ -45,12 +45,11 @@ public static class DisplayDevices
                 yield return curr.Clone();
     }
 
-    public static DISPLAY_DEVICEW? FromID(string id = "", uint getInterfaceName = 0)
+    public static IEnumerable<DISPLAY_DEVICEW> FromID(string id = "", uint getInterfaceName = 0)
     {
         string prefix = getInterfaceName == 0 ? @"MONITOR\" : @"\\?\DISPLAY#";
         foreach (DISPLAY_DEVICEW device in GetAll(getInterfaceName))
             if (device.DeviceID.StartsWith(prefix + id))
-                return device;
-        return null;
+                yield return device;
     }
 }
